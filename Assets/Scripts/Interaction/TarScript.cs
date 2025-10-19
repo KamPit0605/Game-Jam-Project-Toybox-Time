@@ -9,9 +9,13 @@ public class TarScript : MonoBehaviour
     private float TimeSpan = 25f;
     private bool StartSpan = false;
     public bool CloneSpan = false;
+
+    public GameObject TarShape;
+    public GameObject SafeShape;
     // Start is called before the first frame update
     void Start()
     {
+        SafeShape.SetActive(false);
         if (CloneSpan == true) //It should never be "true" for the parent (or the already existing) tar so it could execute properly for its clones only.
         {
             StartSpan = true;
@@ -24,6 +28,11 @@ public class TarScript : MonoBehaviour
     void Update()
     {
         if (StartSpan == true) { TimeSpan -= Time.deltaTime; }
+       if (TimeSpan <= 0.2f)
+        {
+            SafeShape.SetActive (true);
+            TarShape.SetActive (false);
+        }
         if (TimeSpan <= 0) {Destroy(gameObject); }
     }
 }

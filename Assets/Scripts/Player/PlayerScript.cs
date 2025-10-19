@@ -125,7 +125,11 @@ public class PlayerScript : MonoBehaviour
             jumpHeight = PlayerClass.playerJumpHeight;
             ForceField.SetActive(true);
         }
-        else { ForceField.SetActive(false); }
+        else
+        { 
+            ForceField.SetActive(false);
+            invulnerableTimer = 0f;
+        }
 
         Jumping();
         Grounding();
@@ -183,21 +187,34 @@ public class PlayerScript : MonoBehaviour
             speed = 4f;
         }
         */
-        if (collision.CompareTag("Tar"))
+        if (collision.CompareTag("Tar") && invulnerableTimer <= 0)
         {
             speed = speed - 2f;
             jumpHeight = 0.5f;
         }
 
+        if (collision.CompareTag("Safe"))
+        {
+            speed = PlayerClass.playerSpeed;
+            jumpHeight = PlayerClass.playerJumpHeight;
+        }
 
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Slow Field"))
+        if (other.CompareTag("Slow Field") && invulnerableTimer <= 0)
         {
             speed = 4f;
         }
+
+        /*
+        if (other.CompareTag("Safe"))
+        {
+            speed = PlayerClass.playerSpeed;
+            jumpHeight = PlayerClass.playerJumpHeight;
+        }
+        */
 
     }
 

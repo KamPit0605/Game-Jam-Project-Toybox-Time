@@ -10,6 +10,7 @@ TagManager:
   - Slow Field
   - Speed
   - PlayerLock
+  - Safe
   layers:
   - Default
   - TransparentFX
