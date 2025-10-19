@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deab1c688f943704ebcf026798734189, type: 3}
+  m_Name: Item Teleporting
+  m_EditorClassIdentifier: 
+  TPP01: {x: 0, y: 1, z: -2.65}
+  TPP02: {x: -10, y: 1, z: 9.9}
+  TPP03: {x: 10, y: 1, z: 10}
+  TPP04: {x: -10, y: 1, z: -10}
+  TPP05: {x: 10, y: 1, z: -9.9}
+  TPSlowField: {x: 0.33, y: -1.48, z: -2.09}
+  TarMin: {x: -10, y: 1, z: 9}
+  TarMax: {x: 10, y: 1, z: -9}
+  TPP06: {x: -10, y: 1, z: 0}
+  TPP07: {x: 10, y: 1, z: 0}
