@@ -10,14 +10,16 @@ public class PublicScripts : MonoBehaviour
     public UiClass UiClass;
     public PlayerScript PlayerScript;
 
+    private GameObject[] PlayerLocks;
+
     public float timer;
     public float stopwatch;
     public bool runTimer;
     public bool runStopwatch;
     private float timeExtensionLimit;
     //private float timeDuration = 3f * 60f;
-    public float itemSpawnTimer;
-    public float itemSpawnTimerMax = 10; //created static variable for other scripts
+    public float itemSpawnTimer; //COUNTS UP until the time to spawn an object
+    public float itemSpawnTimerMax = 10; //The max time for "itemSpawnTimer" to count up (created static variable for other scripts)
     public bool itemSpawned = false;
 
     public int score;
@@ -41,6 +43,7 @@ public class PublicScripts : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerLocks = GameObject.FindGameObjectsWithTag("PlayerLock");
         Time.timeScale = 1f;
         PopInTextTimer = 1f;
         timer = UiClass.timerSet;
@@ -68,7 +71,13 @@ public class PublicScripts : MonoBehaviour
         if (PlayerScript.jumpPressed == true)
         {
             EnableTimer();
-            StartTextObject.SetActive(true);
+            if (StartTextTimer > 0)
+            {
+                StartTextObject.SetActive(true);
+                foreach (GameObject PLocks in PlayerLocks) { PLocks.SetActive(false); }
+
+            }
+
         }
 
         PopInTexts();
@@ -105,7 +114,7 @@ public class PublicScripts : MonoBehaviour
             else if (stopwatch >= 100f) { timeExtensionLimit = 1; }
 
             itemSpawnTimer += Time.deltaTime;
-            if (itemSpawnTimer >= 10f) 
+            if (itemSpawnTimer >= itemSpawnTimerMax) 
             {
                 itemSpawned = true;
                 //if (itemSpawned == true) { itemSpawnTimer = 0f; }

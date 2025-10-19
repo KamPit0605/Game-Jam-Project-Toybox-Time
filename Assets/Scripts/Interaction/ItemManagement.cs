@@ -41,6 +41,7 @@ public class ItemManagement : MonoBehaviour
 
             //UiScript.itemSpawned = false;
         }
+        Debugging();
     }
 
     void itemSpawnManagement()
@@ -74,5 +75,10 @@ public class ItemManagement : MonoBehaviour
             Instantiate(ShieldPowerUp);
             SpawnPowerUp = 0;
         }
+    }
+
+    void Debugging()
+    {
+        Debug.Log("Spawned Item " + SpawnItem);
     }
 }
