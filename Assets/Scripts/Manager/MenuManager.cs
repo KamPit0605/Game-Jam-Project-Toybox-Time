@@ -77,7 +77,8 @@ public class MenuManager : MonoBehaviour
 
     public void QuitPress()
     {
-
+        Application.Quit();
+        Debug.Log("Pretend that you Quitted the game");
     }
 
     //Loading scenes

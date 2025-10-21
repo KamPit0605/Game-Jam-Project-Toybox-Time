@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeteorScript : MonoBehaviour
 {
     public ItemTeleporting itemTeleporting;
-    private float TimeSpan = 5f;
+    private float TimeSpan = 4.75f;
     private int speed = 5;
     private bool StartSpan = false;
     public bool CloneSpan = false;

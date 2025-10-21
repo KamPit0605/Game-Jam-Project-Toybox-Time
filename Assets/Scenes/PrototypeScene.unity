@@ -3209,6 +3209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6507388598153382825}
   - component: {fileID: 8553726767770402808}
+  - component: {fileID: 8553726767770402809}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -3412,7 +3413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3074718511898261999, guid: 65fd37308ffa4164e9ec5da28c48485d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 3074718511898261999, guid: 65fd37308ffa4164e9ec5da28c48485d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4041,6 +4042,9 @@ MonoBehaviour:
   jumpPressed: 0
   jumpHeld: 0
   pausePressed: 0
+  StunnedTimer: 0
+  StunnedCooldown: 0
+  Stunned: 0
 --- !u!23 &6731587892343773967
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4502,6 +4506,18 @@ MonoBehaviour:
   PauseText: {fileID: 1801440626}
   ResumeFirst: {fileID: 6542772985824988353}
   PlayerScript: {fileID: 6656017106435688206}
+--- !u!114 &8553726767770402809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3832984774968959143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d51fabd5cd895342a6f848f8a80e4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8672533335945687527
 PrefabInstance:
   m_ObjectHideFlags: 0
