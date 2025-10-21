@@ -9,9 +9,15 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject PauseText;
 
+    [SerializeField] private GameObject ResultsMenu;
+    [SerializeField] private GameObject NewRecordText;
+    [SerializeField] private GameObject PreviousRecordText;
+
     [SerializeField] private GameObject ResumeFirst;
 
+
     public PlayerScript PlayerScript;
+    public PublicScripts UiScript;
 
     private bool Paused;
 
