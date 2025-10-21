@@ -7,11 +7,16 @@ public class ItemManagement : MonoBehaviour
     public PublicScripts UiScript;
     private int SpawnItem = 0;
     private int SpawnPowerUp = 0;
+    private int SpawnMultiple = 0;
     
     public GameObject SlowField;
     public SlowFieldScript SlowFieldScript;
     public GameObject Tar;
     public TarScript TarScript;
+    public GameObject Meteor;
+    public MeteorScript MeteorScript;
+
+
 
     public GameObject SpeedPowerUp;
     public SpeedItemScript SpeedItemScript;
@@ -28,9 +33,11 @@ public class ItemManagement : MonoBehaviour
     void Update()
     {
         itemSpawnManagement();
+        itemSpawnMultiple();
+        
         if (UiScript.itemSpawned == true)
         {
-            SpawnItem = Random.Range(1,3);
+            SpawnItem = Random.Range(1,4);
             SpawnPowerUp = Random.Range(0,3);
             if (UiScript.itemSpawned == true) 
             { 
@@ -41,7 +48,7 @@ public class ItemManagement : MonoBehaviour
 
             //UiScript.itemSpawned = false;
         }
-        Debugging();
+        //Debugging();
     }
 
     void itemSpawnManagement()
@@ -61,7 +68,12 @@ public class ItemManagement : MonoBehaviour
             //Tar.SetActive(true);
         }
 
-
+        if (SpawnItem == 3)
+        {
+            SpawnMultiple = Random.Range(1,6);
+            MeteorScript.CloneSpan = true;
+            //Head to itemSpawnMultiple function;
+        }
 
         if (SpawnPowerUp == 1)
         {
@@ -75,10 +87,31 @@ public class ItemManagement : MonoBehaviour
             Instantiate(ShieldPowerUp);
             SpawnPowerUp = 0;
         }
+
+        
+    }
+
+    void itemSpawnMultiple()
+    {
+        if (SpawnMultiple > 0)
+        {
+            SpawnMultiple--;
+            if (SpawnItem == 3) { Instantiate(Meteor);}
+
+         
+        }
+   
+        if (SpawnMultiple <= 0)
+        {
+            SpawnItem = 0;
+            SpawnMultiple = 0;
+        }
+           
     }
 
     void Debugging()
     {
         Debug.Log("Spawned Item " + SpawnItem);
+        Debug.Log("Spawned Multiple " + SpawnMultiple);
     }
 }

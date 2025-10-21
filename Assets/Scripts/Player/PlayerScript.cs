@@ -32,6 +32,10 @@ public class PlayerScript : MonoBehaviour
     private float jumpHeldMax;
 
     public bool pausePressed;
+
+    public float StunnedTimer;
+    public float StunnedCooldown;
+    public bool Stunned;
     //private bool onFloor;
 
     // Start is called before the first frame update
@@ -121,8 +125,7 @@ public class PlayerScript : MonoBehaviour
         if (invulnerableTimer > 0)
         {
             invulnerableTimer -= Time.deltaTime;
-            speed = PlayerClass.playerSpeed;
-            jumpHeight = PlayerClass.playerJumpHeight;
+            DefaultStats();
             ForceField.SetActive(true);
         }
         else
@@ -131,6 +134,8 @@ public class PlayerScript : MonoBehaviour
             invulnerableTimer = 0f;
         }
 
+        Stunning();
+        
         Jumping();
         Grounding();
         PlayerAdjustment();
@@ -167,6 +172,36 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    void DefaultStats()
+    {
+        speed = PlayerClass.playerSpeed;
+        jumpHeight = PlayerClass.playerJumpHeight;
+    }
+
+    void Stunning()
+    {
+        if (StunnedTimer > 0)
+        {
+            StunnedTimer -= Time.deltaTime;
+            speed = 2f;
+            jumpHeight = 0.5f;
+            if (StunnedTimer <= 0.2f) { DefaultStats(); }
+        }
+        if (StunnedTimer <= 0) { StunnedTimer = 0; }
+
+        //if (Stunned == true) { StunnedCooldown = 0.5f;}
+        if (StunnedCooldown > 0)
+        {
+            Stunned = true;
+            StunnedCooldown -= Time.deltaTime;
+        }
+        if (StunnedCooldown <= 0)
+        {
+            Stunned = false;
+            StunnedCooldown = 0f;
+        }
+
+    }
 
     //Interaction Functions
 
@@ -195,10 +230,16 @@ public class PlayerScript : MonoBehaviour
 
         if (collision.CompareTag("Safe"))
         {
-            speed = PlayerClass.playerSpeed;
-            jumpHeight = PlayerClass.playerJumpHeight;
+            DefaultStats();
         }
 
+        /*
+        if (collision.CompareTag("Meteor"))
+        {
+            speed = 2f;
+
+        }
+        */
     }
 
     private void OnTriggerStay(Collider other)
@@ -208,6 +249,11 @@ public class PlayerScript : MonoBehaviour
             speed = 4f;
         }
 
+        if (other.CompareTag("Meteor") && Stunned == false && invulnerableTimer <= 0)
+        {
+            StunnedTimer += 2f;
+            StunnedCooldown = 0.5f;
+        }
         /*
         if (other.CompareTag("Safe"))
         {
@@ -220,8 +266,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerExit(Collider collision) 
     {
-        speed = PlayerClass.playerSpeed;
-        jumpHeight = PlayerClass.playerJumpHeight;
+        DefaultStats();
 
         if (collision.CompareTag("Tar"))
         {

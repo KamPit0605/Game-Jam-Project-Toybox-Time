@@ -11,6 +11,8 @@ TagManager:
   - Speed
   - PlayerLock
   - Safe
+  - Meteor
+  - Destroy
   layers:
   - Default
   - TransparentFX

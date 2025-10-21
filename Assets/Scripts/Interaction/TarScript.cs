@@ -27,7 +27,7 @@ public class TarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (StartSpan == true) { TimeSpan -= Time.deltaTime; }
+       if (StartSpan == true) { TimeSpan -= Time.deltaTime; }
        if (TimeSpan <= 0.2f)
         {
             SafeShape.SetActive (true);
