@@ -9,7 +9,6 @@ public class PublicScripts : MonoBehaviour
     
     public UiClass UiClass;
     public PlayerScript PlayerScript;
-
     private GameObject[] PlayerLocks;
 
     public float timer;
@@ -26,9 +25,18 @@ public class PublicScripts : MonoBehaviour
     public int scoreQuota; //*The goal or win condition
     public float SecondsAddedTextTimer;
 
+    public float ResultTimer;
+    public int ResultObject;
+    public bool ResultShow;
+    public bool isNewRecord;
+
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI stopwatchText;
     public TextMeshProUGUI scoreText;
+
+    public TextMeshProUGUI scoreResultsText;
+    public TextMeshProUGUI stopwatchResultsText;
+    [SerializeField] private GameObject ResultsText;
 
     [SerializeField] private GameObject StartTextObject;
     [SerializeField] private GameObject FinishTextObject;
@@ -43,9 +51,13 @@ public class PublicScripts : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         PlayerLocks = GameObject.FindGameObjectsWithTag("PlayerLock");
         Time.timeScale = 1f;
         PopInTextTimer = 1f;
+        ResultTimer = 3f;
+        ResultShow = false;
+        isNewRecord = false;
         timer = UiClass.timerSet;
         scoreQuota = UiClass.scoreQuota;
         runTimer = false;
@@ -56,6 +68,7 @@ public class PublicScripts : MonoBehaviour
         StartTextObject.SetActive(false);
         FinishTextObject.SetActive(false);
         SecondsAddedTextObject.SetActive(false);
+        ResultsText.SetActive(false);
 
 
     }
@@ -67,6 +80,8 @@ public class PublicScripts : MonoBehaviour
         timerText.text = timer.ToString("0.00");
         stopwatchText.text = stopwatch.ToString("0.00");
         scoreText.text = score.ToString();
+        scoreResultsText.text = score.ToString();
+        stopwatchResultsText.text = stopwatch.ToString("0.00");
 
         if (PlayerScript.jumpPressed == true)
         {
@@ -81,6 +96,7 @@ public class PublicScripts : MonoBehaviour
         }
 
         PopInTexts();
+        ResultsResults();
         //Scoring();
     }
 
@@ -100,7 +116,8 @@ public class PublicScripts : MonoBehaviour
                 timer = 0f;
                 runTimer = false;
                 runStopwatch = false;
-
+                ResultTimer--;
+                if (ResultTimer == 0) {ResultShow = true;}
             }
         }
 
@@ -142,6 +159,20 @@ public class PublicScripts : MonoBehaviour
         ReadyTextObject.SetActive(false);
     }
 
+    public void ResultsResults()
+    {
+        if (ResultShow == true)
+        {
+            ResultsText.SetActive(true);
+            
+            if (score > PublicStatic.ResultsRecordScore)
+            {
+                PublicStatic.ResultsRecordScore = score;
+                isNewRecord = true;
+            }
+            ResultTimer = 0;
+        }
+    }
     void PopInTexts()
     {
         if (PopInTextTimer <= 0f)

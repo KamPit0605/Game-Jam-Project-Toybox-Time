@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 28408724}
   - component: {fileID: 28408723}
   m_Layer: 5
-  m_Name: Quit Button
+  m_Name: Main Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 290853277}
   - component: {fileID: 290853276}
   m_Layer: 5
-  m_Name: Restart Button
+  m_Name: Play Again Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1746,6 +1746,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936400890}
   m_CullTransparentMesh: 1
+--- !u!1 &948622357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948622358}
+  - component: {fileID: 948622359}
+  m_Layer: 0
+  m_Name: PublicStatic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &948622358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948622357}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2831156487063930828}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &948622359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948622357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d083e73214777e64fb60b86d46560387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,7 +2762,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Play Again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4050,6 +4094,7 @@ Transform:
   m_Children:
   - {fileID: 5674209236695201469}
   - {fileID: 6507388598153382825}
+  - {fileID: 948622358}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &2990721569662434725
@@ -4774,9 +4819,16 @@ MonoBehaviour:
   score: 0
   scoreQuota: 0
   SecondsAddedTextTimer: 0
+  ResultTimer: 0
+  ResultObject: 0
+  ResultShow: 0
+  isNewRecord: 0
   timerText: {fileID: 3662477320674807369}
   stopwatchText: {fileID: 936400892}
   scoreText: {fileID: 1252756356}
+  scoreResultsText: {fileID: 1433801347}
+  stopwatchResultsText: {fileID: 188023567}
+  ResultsText: {fileID: 864605099}
   StartTextObject: {fileID: 2025311328}
   FinishTextObject: {fileID: 2086681806}
   ReadyTextObject: {fileID: 1769319820}
@@ -5794,8 +5846,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 4277001562314997156}
   PauseText: {fileID: 1801440626}
+  ResultsMenu: {fileID: 1257246236}
+  NewRecordText: {fileID: 1125702748}
+  PreviousRecordText: {fileID: 137548047}
   ResumeFirst: {fileID: 6542772985824988353}
+  PlayAgainFirst: {fileID: 290853274}
   PlayerScript: {fileID: 6656017106435688206}
+  UiScript: {fileID: 4702221884683045473}
 --- !u!114 &8553726767770402809
 MonoBehaviour:
   m_ObjectHideFlags: 0

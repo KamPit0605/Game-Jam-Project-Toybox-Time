@@ -14,7 +14,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject PreviousRecordText;
 
     [SerializeField] private GameObject ResumeFirst;
-
+    [SerializeField] private GameObject PlayAgainFirst;
+    
 
     public PlayerScript PlayerScript;
     public PublicScripts UiScript;
@@ -25,6 +26,9 @@ public class MenuManager : MonoBehaviour
     {
         PauseMenu.SetActive(false);
         PauseText.SetActive(false);
+        ResultsMenu.SetActive(false);
+        NewRecordText.SetActive(false);
+        PreviousRecordText.SetActive(false);
     }
 
     private void Update()
@@ -57,6 +61,14 @@ public class MenuManager : MonoBehaviour
         PauseText.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(ResumeFirst);
+    }
+
+    private void OpenResults()
+    {
+        ResultsMenu.SetActive(true);
+        if (UiScript.isNewRecord){NewRecordText.SetActive(true);}
+        else { PreviousRecordText.SetActive(true); }
+        
     }
 
     private void CloseAllMenus()
