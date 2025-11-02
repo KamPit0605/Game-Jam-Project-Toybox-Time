@@ -24,6 +24,7 @@ public class PublicScripts : MonoBehaviour
     public int score;
     public int scoreQuota; //*The goal or win condition
     public float SecondsAddedTextTimer;
+    [SerializeField] private bool canScore;
 
     public float ResultTimer;
     public int ResultObject;
@@ -37,6 +38,7 @@ public class PublicScripts : MonoBehaviour
     public TextMeshProUGUI scoreResultsText;
     public TextMeshProUGUI stopwatchResultsText;
     [SerializeField] private GameObject ResultsText;
+    public TextMeshProUGUI previousRecordResultsText;
 
     [SerializeField] private GameObject StartTextObject;
     [SerializeField] private GameObject FinishTextObject;
@@ -69,7 +71,7 @@ public class PublicScripts : MonoBehaviour
         FinishTextObject.SetActive(false);
         SecondsAddedTextObject.SetActive(false);
         ResultsText.SetActive(false);
-
+        canScore = true;
 
     }
 
@@ -108,18 +110,19 @@ public class PublicScripts : MonoBehaviour
             StartTextTimer -= Time.deltaTime;
             PopInTextTimer -= Time.deltaTime;
             timer -= Time.deltaTime;
-            if (timer <= 5f) {timerText.color = Color.red;}
-            else {timerText.color = Color.white;}
-
-            if (timer <= 0f) 
-            {
-                timer = 0f;
-                runTimer = false;
-                runStopwatch = false;
-                ResultTimer--;
-                if (ResultTimer == 0) {ResultShow = true;}
-            }
+            if (timer <= 5f) { timerText.color = Color.red; }
+            else { timerText.color = Color.white; }
         }
+        if (timer <= 0f) 
+        {
+            timer = 0f;
+            runTimer = false;
+            runStopwatch = false;
+            canScore = false;
+            ResultTimer -= Time.deltaTime;
+            if (ResultTimer <= 0) {ResultShow = true;}
+        }
+        
 
         if (runStopwatch == true)
         {
@@ -143,13 +146,16 @@ public class PublicScripts : MonoBehaviour
 
     public void Scoring()
     {
-        string Seconds = " Seconds";
-        PopInTextTimer = 1f;
-        score++;
-        timer = timer + timeExtensionLimit;
-        SecondsAddedTextObject.SetActive(true);
-        if (timeExtensionLimit == 1) { Seconds = " Second"; }
-        SecondsAdddedText.text = "+" + timeExtensionLimit + Seconds;
+        if (canScore)
+        {
+            string Seconds = " Seconds";
+            PopInTextTimer = 1f;
+            score++;
+            timer = timer + timeExtensionLimit;
+            SecondsAddedTextObject.SetActive(true);
+            if (timeExtensionLimit == 1) { Seconds = " Second"; }
+            SecondsAdddedText.text = "+" + timeExtensionLimit + Seconds;
+        }
     }
 
     public void EnableTimer()
@@ -170,7 +176,11 @@ public class PublicScripts : MonoBehaviour
                 PublicStatic.ResultsRecordScore = score;
                 isNewRecord = true;
             }
-            ResultTimer = 0;
+            else
+            {
+                previousRecordResultsText.text = "Previous Record: " + PublicStatic.ResultsRecordScore;
+            }
+            //ResultTimer = 0;
         }
     }
     void PopInTexts()
@@ -189,7 +199,7 @@ public class PublicScripts : MonoBehaviour
         if (timer <= 0f)
         {
             FinishTextObject.SetActive(true);
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
         }
     }
 }

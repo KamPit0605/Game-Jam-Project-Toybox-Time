@@ -39,6 +39,12 @@ public class MenuManager : MonoBehaviour
             else { Unpause(); }
             PlayerScript.pausePressed = false;
         }
+
+        if (UiScript.ResultShow == true)
+        {
+            OpenResults();
+        }
+
     }
 
      //Pausing
@@ -66,9 +72,11 @@ public class MenuManager : MonoBehaviour
     private void OpenResults()
     {
         ResultsMenu.SetActive(true);
+
         if (UiScript.isNewRecord){NewRecordText.SetActive(true);}
         else { PreviousRecordText.SetActive(true); }
-        
+
+        EventSystem.current.SetSelectedGameObject(PlayAgainFirst);
     }
 
     private void CloseAllMenus()
