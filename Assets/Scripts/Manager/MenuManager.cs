@@ -22,6 +22,7 @@ public class MenuManager : MonoBehaviour
 
     private bool Paused;
 
+
     private void Start()
     {
         PauseMenu.SetActive(false);
@@ -33,7 +34,7 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerScript.pausePressed == true)
+        if ((PlayerScript.pausePressed == true) && (UiScript.timer > 0))
         {
             if (!Paused) { Pause(); }
             else { Unpause(); }
@@ -71,12 +72,17 @@ public class MenuManager : MonoBehaviour
 
     private void OpenResults()
     {
+        LoadResults("ResultsScene");
+        /* moved to "MenuResultsManager"
+        PauseMenu.SetActive(false);
         ResultsMenu.SetActive(true);
+        Time.timeScale = 0f;
 
         if (UiScript.isNewRecord){NewRecordText.SetActive(true);}
         else { PreviousRecordText.SetActive(true); }
 
         EventSystem.current.SetSelectedGameObject(PlayAgainFirst);
+        */
     }
 
     private void CloseAllMenus()
@@ -111,5 +117,10 @@ public class MenuManager : MonoBehaviour
     public void LoadGame (string PrototypeScene)
     {
         SceneManager.LoadScene(PrototypeScene);
+    }
+
+    public void LoadResults(string ResultsScene)
+    {
+        SceneManager.LoadScene(ResultsScene);
     }
 }

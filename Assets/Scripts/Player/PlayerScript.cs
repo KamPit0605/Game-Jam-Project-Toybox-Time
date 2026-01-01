@@ -166,10 +166,7 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerAdjustment()
     {
-        if (speed <= 0f)
-        {
-            speed = 2f;
-        }
+        if (speed <= 0f) { speed = 2f;}
     }
 
     void DefaultStats()

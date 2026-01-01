@@ -53,7 +53,7 @@ public class PublicScripts : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         PlayerLocks = GameObject.FindGameObjectsWithTag("PlayerLock");
         Time.timeScale = 1f;
         PopInTextTimer = 1f;
@@ -120,6 +120,7 @@ public class PublicScripts : MonoBehaviour
             runStopwatch = false;
             canScore = false;
             ResultTimer -= Time.deltaTime;
+            ScoreSyncing();
             if (ResultTimer <= 0) {ResultShow = true;}
         }
         
@@ -158,6 +159,12 @@ public class PublicScripts : MonoBehaviour
         }
     }
 
+    public void ScoreSyncing()
+    {
+        PublicStatic.ResultsScore = score;
+        PublicStatic.ResultsStopwatch = stopwatch;
+    }
+
     public void EnableTimer()
     {
         runTimer = true;
@@ -167,9 +174,14 @@ public class PublicScripts : MonoBehaviour
 
     public void ResultsResults()
     {
-        if (ResultShow == true)
+        return;
+        /*if (ResultShow == true)
         {
+            PublicStatic.ResultsScore = score;
+            PublicStatic.ResultsStopwatch = stopwatch;
+            
             ResultsText.SetActive(true);
+            FinishTextObject.SetActive(false);
             
             if (score > PublicStatic.ResultsRecordScore)
             {
@@ -180,8 +192,9 @@ public class PublicScripts : MonoBehaviour
             {
                 previousRecordResultsText.text = "Previous Record: " + PublicStatic.ResultsRecordScore;
             }
-            //ResultTimer = 0;
+            ResultTimer = 0; 
         }
+        */
     }
     void PopInTexts()
     {
@@ -196,7 +209,7 @@ public class PublicScripts : MonoBehaviour
             StartTextTimer = 0f;
         }
 
-        if (timer <= 0f)
+        if ((timer <= 0f) && (ResultShow == false))
         {
             FinishTextObject.SetActive(true);
             //Time.timeScale = 0f;
