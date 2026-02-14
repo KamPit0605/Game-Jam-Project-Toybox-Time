@@ -13,6 +13,7 @@ public class UiResultsScript : MonoBehaviour
     public TextMeshProUGUI previousRecordResultsText;
 
     public bool isNewRecord;
+    public float RecordTextTimer = 1f;
 
     void Start()
     {
@@ -24,6 +25,9 @@ public class UiResultsScript : MonoBehaviour
 
     void Update()
     {
+        RecordTextTimer -= Time.deltaTime;
+        if (RecordTextTimer <= 0) {RecordTextTimer = 0;}
+
         ResultsResults();
     }
 

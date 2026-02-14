@@ -26,7 +26,7 @@ public class MenuResultsManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Resultss();
+        if (UiRScript.RecordTextTimer <= 0f) { Resultss(); }
     }
 
     public void Resultss()
