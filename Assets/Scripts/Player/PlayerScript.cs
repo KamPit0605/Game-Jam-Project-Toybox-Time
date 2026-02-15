@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour
     public bool jumpPressed;
     public float jumpHeld;
     private float jumpHeldMax;
+    private float jumpWindow; //coyote time
 
     public bool pausePressed;
 
@@ -101,7 +102,7 @@ public class PlayerScript : MonoBehaviour
 
     void Jumping()
     {
-        if (jumpPressed == true) { jumpHeld = jumpHeld + 0.5f; }
+        if (jumpPressed == true && jumpWindow > 0f) { jumpHeld = jumpHeld + 0.5f; }
         if (jumpHeld >= jumpHeldMax) {jumpPressed = false; }
     }
 
@@ -152,9 +153,11 @@ public class PlayerScript : MonoBehaviour
             gravity = PlayerClass.gravity;
             jumpPressed = false;
             jumpHeld = 0f;
+            jumpWindow = 0.2f; 
         }
         else
         {
+            jumpWindow -= Time.deltaTime;
             if (jumpHeld >= jumpHeldMax)
             {
                 velocity.y += jumpHeight * gravity * Time.deltaTime;
@@ -162,6 +165,8 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
+        if (jumpWindow <= 0f) {jumpWindow = 0f;}
+
     }
 
     void PlayerAdjustment()

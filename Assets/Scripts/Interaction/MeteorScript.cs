@@ -29,7 +29,7 @@ public class MeteorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(PlayerInteracted);
+        //Debug.Log(PlayerInteracted);
         if (StartSpan)
         {
             Meteor.transform.Translate(Vector3.down * speed * Time.deltaTime);
