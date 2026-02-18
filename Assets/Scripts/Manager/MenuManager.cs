@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
     public PublicScripts UiScript;
 
     private bool Paused;
-
+    private bool SceneLoaded = false; //Prevents scene duplicating
 
     private void Start()
     {
@@ -41,9 +41,10 @@ public class MenuManager : MonoBehaviour
             PlayerScript.pausePressed = false;
         }
 
-        if (UiScript.ResultShow == true)
+        if (UiScript.ResultShow == true && SceneLoaded == false)
         {
             OpenResults();
+            
         }
 
     }
@@ -73,6 +74,8 @@ public class MenuManager : MonoBehaviour
     private void OpenResults()
     {
         LoadResults("ResultsScene");
+        SceneLoaded = true;
+
         /* moved to "MenuResultsManager"
         PauseMenu.SetActive(false);
         ResultsMenu.SetActive(true);
@@ -121,6 +124,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadResults(string ResultsScene)
     {
-        SceneManager.LoadScene(ResultsScene);
+        SceneManager.LoadScene(ResultsScene, LoadSceneMode.Additive);
+        
     }
 }

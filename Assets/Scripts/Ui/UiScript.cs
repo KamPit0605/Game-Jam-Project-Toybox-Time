@@ -121,7 +121,7 @@ public class PublicScripts : MonoBehaviour
             canScore = false;
             ResultTimer -= Time.deltaTime;
             ScoreSyncing();
-            if (ResultTimer <= 0) {ResultShow = true;}
+            if (ResultTimer <= 0 && ResultShow == false) {ResultShow = true;}
         }
         
 
