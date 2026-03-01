@@ -25,9 +25,10 @@ public class UiResultsScript : MonoBehaviour
 
     void Update()
     {
+        
         RecordTextTimer -= Time.deltaTime;
         if (RecordTextTimer <= 0) {RecordTextTimer = 0;}
-
+        
         ResultsResults();
     }
 
@@ -35,7 +36,7 @@ public class UiResultsScript : MonoBehaviour
     {
 
         ResultsText.SetActive(true);
-
+        
         if (PublicStatic.ResultsScore> PublicStatic.ResultsRecordScore)
         {
             PublicStatic.ResultsRecordScore = PublicStatic.ResultsScore;

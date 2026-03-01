@@ -26,7 +26,7 @@ public class PublicScripts : MonoBehaviour
     public float SecondsAddedTextTimer;
     [SerializeField] private bool canScore;
 
-    public float ResultTimer;
+    public float ResultTimer; //Time before results are shown
     public int ResultObject;
     public bool ResultShow;
     public bool isNewRecord;
@@ -121,7 +121,11 @@ public class PublicScripts : MonoBehaviour
             canScore = false;
             ResultTimer -= Time.deltaTime;
             ScoreSyncing();
-            if (ResultTimer <= 0 && ResultShow == false) {ResultShow = true;}
+            if (ResultTimer <= 0 && ResultShow == false)
+            {
+                
+                ResultShow = true;
+            }
         }
         
 

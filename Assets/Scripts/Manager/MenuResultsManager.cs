@@ -35,6 +35,7 @@ public class MenuResultsManager : MonoBehaviour
         if (UiRScript.isNewRecord) { NewRecordText.SetActive(true); }
         else { PreviousRecordText.SetActive(true); }
 
+        Time.timeScale = 0f;
     }
 
     //Menus
